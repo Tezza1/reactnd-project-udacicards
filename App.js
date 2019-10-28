@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import Header from './components/Header'
+import HomeScreen from './screens/HomeScreen'
 
-export default function App() {
-  const [outputText, setOutputText] = useState('Open up App')
+const App = props => {
 
   return (
-    <View style={styles.container}>
-      <Text>{outputText}</Text>
-      <Button title='Change Text' onPress={() => setOutputText('Open the App #2')} />
+    <View style={styles.screen}>
+      <Header title={'UdaciCards'}/>
+      <HomeScreen />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  screen:{
+    flex: 1
   }
 });
+
+export default App
