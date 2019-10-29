@@ -25,7 +25,7 @@ const CreateDeck = props => {
           onPress={() => {}}
         />
         <Button
-          title='Add Deck'
+          title='Add'
           style={styles.button}
           onPress={() => props.onAddDeck(enteredDeck)}
         />
@@ -42,16 +42,24 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   textInput: {
-    width: '70%',
-    borderBottomColor: 'black',
+    width: '80%',
+    padding: 10,
+    fontSize: 18,
+    borderBottomColor: '#90a4ae',
     borderBottomWidth: 1,
-    padding: 10
+    // ios
+    shadowColor: '#607d8b',
+    shadowOffset: { width: 1, height: 2},
+    shadowRadius: 2,
+    shadowOpacity: 0.3,
+    // android
+    elevation: 5
   },
   buttons: {
     flexDirection: 'row',
-    width: '70%',
+    width: '60%',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     marginTop: 10
   }
 });

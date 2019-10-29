@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 const DeckItem = props => {
   return(
     <TouchableOpacity activeOpacity={0.7}  onPress={() => {}}>
       <View style={styles.listItem}>
+        <Ionicons name='ios-arrow-forward' size={24} color={'#607d8b'}/>
         <Text style={styles.title}>{props.title}</Text>
       </View>
     </TouchableOpacity>
@@ -13,7 +15,8 @@ const DeckItem = props => {
 
 const styles = StyleSheet.create({
   listItem: {
-    paddingHorizontal: 10,
+    flexDirection: 'row',
+    paddingHorizontal: 15,
     paddingVertical: 20,
     marginVertical: 10,
     borderColor: '#90a4ae',
@@ -21,16 +24,18 @@ const styles = StyleSheet.create({
     // ios
     shadowColor: '#607d8b',
     shadowOffset: { width: 1, height: 2},
-    shadowRadius: 4,
-    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    shadowOpacity: 0.3,
     // android
     elevation: 5,
     borderRadius: 10,
-    backgroundColor: '#eceff1'
+    backgroundColor: 'white'
   },
   title: {
+    fontFamily: 'openSansBold',
     color: '#607d8b',
-    fontSize: 16
+    fontSize: 16,
+    marginLeft: 10
   }
 })
 
