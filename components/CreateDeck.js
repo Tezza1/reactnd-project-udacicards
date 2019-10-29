@@ -47,13 +47,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderBottomColor: '#90a4ae',
     borderBottomWidth: 1,
-    // ios
-    shadowColor: '#607d8b',
-    shadowOffset: { width: 1, height: 2},
-    shadowRadius: 2,
-    shadowOpacity: 0.3,
-    // android
-    elevation: 5
   },
   buttons: {
     flexDirection: 'row',

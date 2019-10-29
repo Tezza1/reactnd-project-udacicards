@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
@@ -14,9 +14,13 @@ const HomeScreen = props => {
       {key: Math.random().toString(), title: title}
     ])
   }
-
   return (
     <View style={styles.screen}>
+      <View>
+        <Button title='Go there' onPress={() => {
+          props.navigation.navigate({routeName: 'Deck'})
+        }}/>
+      </View>
       <View style={styles.cardView} >
         <CreateDeck onAddDeck={addDeckHandler}/>
         {/* <ScrollView></ScrollView> */}

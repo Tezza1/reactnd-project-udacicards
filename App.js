@@ -4,6 +4,7 @@ import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
+import AppNavigator from './navigation/Navigation'
 
 const fonts = () => {
   return Font.loadAsync({
@@ -26,12 +27,13 @@ const App = props => {
     )
   }
 
-  return (
+    /*return (
     <View style={styles.screen}>
       <Header title={'UdaciCards'}/>
       <HomeScreen />
     </View>
-  );
+  )*/
+  return <AppNavigator />
 }
 
 const styles = StyleSheet.create({
