@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 
 const QuizScreen = props => {
+  console.log(props.navigation.getParam('categoryId'))
   return(
     <View style={styles.screen}>
       <Text>This is the QuizScreen</Text>

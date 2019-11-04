@@ -35,6 +35,16 @@ const HomeScreen = props => {
   )
 }
 
+HomeScreen.navigationOptions = {
+  headerTitle: 'Home',
+  headerStyle: {
+    // backgroundColor: 'blue',
+    // fontFamily: 'openSans',
+    // fontWeight: '600'
+  },
+  headerTintColor: 'blue'
+}
+
 const styles = StyleSheet.create({
   screen:{
     flex: 1
