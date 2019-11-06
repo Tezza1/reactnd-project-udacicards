@@ -14,8 +14,12 @@ const HomeScreen = props => {
       {key: Math.random().toString(), title: title}
     ])
   }
+
   return (
     <View style={styles.screen}>
+      <View>
+        <Header title={'Udacicards'}/>
+      </View>
       <View>
         <Button title='Go there' onPress={() => {
           props.navigation.navigate({routeName: 'Deck'})
@@ -36,7 +40,7 @@ const HomeScreen = props => {
 }
 
 HomeScreen.navigationOptions = {
-  headerTitle: 'Home',
+  headerTitle: '',
   headerStyle: {
     // backgroundColor: 'blue',
     // fontFamily: 'openSans',
