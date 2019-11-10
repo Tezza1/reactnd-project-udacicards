@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-native'
 
 const CreateDeck = props => {
   const [enteredDeck, setEnteredDeck] = useState('')
 
   const inputTextHandler = (e) => {
     setEnteredDeck(e)
+  }
+
+  const cancelHandler = () => {
+    setEnteredDeck('')
+    Keyboard.dismiss()
+  }
+
+  const addHandler = () => {
+    props.onAddDeck(enteredDeck)
+    cancelHandler()
   }
 
   return (
@@ -22,12 +32,12 @@ const CreateDeck = props => {
           title='Cancel'
           style={styles.button}
           color="red"
-          onPress={() => {}}
+          onPress={cancelHandler}
         />
         <Button
           title='Add'
           style={styles.button}
-          onPress={() => props.onAddDeck(enteredDeck)}
+          onPress={addHandler}
         />
       </View>
     </View>

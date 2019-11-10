@@ -1,4 +1,4 @@
-{
+export const QUESTIONS = {
   Verbs: {
     title: 'Verbs',
     questions: [

@@ -5,6 +5,12 @@ import HomeScreen from './screens/HomeScreen'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 import AppNavigator from './navigation/Navigation'
+import { createStore, combineReducers } from 'redux'
+import rootReducer from './store/reducers'
+import { Provider } from 'react-redux'
+import applyMiddleware from './store/middleware'
+
+const store = createStore(rootReducer, applyMiddleware)
 
 const fonts = () => {
   return Font.loadAsync({
@@ -33,7 +39,11 @@ const App = props => {
       <HomeScreen />
     </View>
   )*/
-  return <AppNavigator />
+  return (
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  )
 }
 
 const styles = StyleSheet.create({
