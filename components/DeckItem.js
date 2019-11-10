@@ -4,14 +4,25 @@ import { Ionicons } from '@expo/vector-icons'
 
 const DeckItem = props => {
   return(
-    <TouchableOpacity activeOpacity={0.7}  onPress={() => {}}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+        onPress={() => {props.navigation.navigate({routeName: 'Deck'})
+      }}
+    >
       <View style={styles.listItem}>
-        <Ionicons name='ios-arrow-forward' size={24} color={'#607d8b'}/>
+        <Ionicons name='ios-arrow-forward' size={24} color={'white'}/>
         <Text style={styles.title}>{props.title}</Text>
       </View>
     </TouchableOpacity>
   )
 }
+
+  /* <View>
+        <Button title='Go there' onPress={() => {
+          props.navigation.navigate({routeName: 'Deck'})
+        }}/>
+        </View>
+  */
 
 const styles = StyleSheet.create({
   listItem: {
@@ -29,11 +40,11 @@ const styles = StyleSheet.create({
     // android
     elevation: 5,
     borderRadius: 10,
-    backgroundColor: 'white'
+    backgroundColor: '#0277bd'
   },
   title: {
     fontFamily: 'openSansBold',
-    color: '#607d8b',
+    color: 'white',
     fontSize: 16,
     marginLeft: 10
   }

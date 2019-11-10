@@ -16,7 +16,15 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     backgroundColor: '#0277bd',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderColor: '#90a4ae',
+    borderWidth: 1,
+    // ios
+    shadowColor: '#607d8b',
+    shadowOffset: { width: 1, height: 2},
+    shadowOpacity: 0.3,
+    // android
+    elevation: 5,
   },
   title: {
     color: 'white',

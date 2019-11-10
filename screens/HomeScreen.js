@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getQuestions } from '../store/actions/questions'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
@@ -38,18 +38,13 @@ const HomeScreen = props => {
       <View>
         <Header title={"Udacicard's Japanese Builder"}/>
       </View>
-      <View>
-        <Button title='Go there' onPress={() => {
-          props.navigation.navigate({routeName: 'Deck'})
-        }}/>
-      </View>
       <View style={styles.cardView} >
         <CreateDeck onAddDeck={addDeckHandler}/>
         {/* <ScrollView></ScrollView> */}
         <FlatList
           data = { deckList }
           renderItem= {i => (
-              <DeckItem title={i.item.title} />
+              <DeckItem title={i.item.title} navigation={props.navigation} />
             )}
           />
       </View>
