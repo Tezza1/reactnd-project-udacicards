@@ -1,14 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { setDeck } from '../store/actions/questions'
 
 const DeckItem = props => {
   return(
     <TouchableOpacity
-      activeOpacity={0.7}
-        onPress={() => {props.navigation.navigate({routeName: 'Deck'})
-      }}
-    >
+    activeOpacity={0.7}
+    onPress={() => {
+      props.setDeck(props.title)
+      props.navigation.navigate({
+        routeName: 'Deck',
+        params: {
+          title: props.title
+        }
+      })
+    }}>
       <View style={styles.listItem}>
         <Ionicons name='ios-arrow-forward' size={24} color={'white'}/>
         <Text style={styles.title}>{props.title}</Text>
@@ -50,4 +58,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DeckItem
+const mapDispatchToProps = dispatch => {
+  return {
+    setDeck: (title) => dispatch(setDeck(title))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DeckItem)

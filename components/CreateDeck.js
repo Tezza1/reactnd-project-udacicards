@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-nativ
 
 const CreateDeck = props => {
   const [enteredDeck, setEnteredDeck] = useState('')
+  const [inputError, setInputError] = useState(false)
+  let errorDisplay = ''
 
   const inputTextHandler = (e) => {
     setEnteredDeck(e)
@@ -10,16 +12,32 @@ const CreateDeck = props => {
 
   const cancelHandler = () => {
     setEnteredDeck('')
+    setInputError(false)
     Keyboard.dismiss()
   }
 
   const addHandler = () => {
-    props.onAddDeck(enteredDeck)
-    cancelHandler()
+    if(enteredDeck === '') {
+      setInputError(true)
+    } else {
+      props.onAddDeck(enteredDeck)
+      cancelHandler()
+    }
+  }
+
+  if(inputError){
+    errorDisplay = (
+      <View>
+        <Text style={styles.errorText}>Please add a title</Text>
+      </View>
+    )
+  } else {
+    errorDisplay = <View></View>
   }
 
   return (
     <View style={styles.inputView}>
+      {errorDisplay}
       <TextInput
         placeholder='Add a New Card Deck'
         style={styles.textInput}
@@ -64,6 +82,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginTop: 10
+  },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
   }
 });
 

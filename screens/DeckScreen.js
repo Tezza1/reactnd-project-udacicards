@@ -1,33 +1,26 @@
-import React, { useState } from 'react'
-import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect  } from 'react'
+import { connect } from 'react-redux'
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 
 const DeckScreen = props => {
-  const testData = [{key: 'aa', name: 'Bob'}, {key: 'bb', name: 'Bill'}, {key: 'cc', name: 'Jill'}, {key: 'dd', name: 'Liz'}]
+  const [title, setTitle] = useState('')
+  const [questions, setQuestions] = useState('')
 
-  const renderGridItem = data => {
-    return (
-      <TouchableOpacity onPress={() => {
-        props.navigation.navigate({
-          routeName: 'Quiz',
-          params: {
-            // can send any key value pairs you like
-            categoryId: data.item.key
-          }
-        })
-      }}>
-        <View style={styles.grid}>
-          <Text>{data.item.name}</Text>
-        </View>
-    </TouchableOpacity>
-    )
-  }
+  useEffect(() => {
+    setTitle(props.deck.title)
+    setQuestions(props.deck.questions)
+  })
 
-  DeckScreen.navigationOptions = (navigationData) => {
-    navigationData.navigation.getParam('categoryId')
-    // const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId)
-    // return {
-      // headerTitle: selectedCategory.title
-    // }
+
+  DeckScreen.navigationOptions = navigationData => {
+    return {
+      headerTitle: navigationData.navigation.getParam('title'),
+      headerStyle: {
+        fontFamily: 'openSans',
+        fontWeight: 'bold'
+      },
+      headerTintColor: '#0277bd'
+    }
   }
 
   return(
@@ -37,13 +30,10 @@ const DeckScreen = props => {
           props.navigation.navigate({routeName: 'Slide'})
         }}/>
         <Text>This is the DeckScreen</Text>
+        <Text>{title}</Text>
+        <Text>{questions.length}</Text>
       </View>
       <View>
-        <FlatList
-          data = {testData}
-          renderItem={renderGridItem}
-          numColumns={2}
-        />
       </View>
     </View>
   )
@@ -63,4 +53,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DeckScreen
+const mapStateToProps = state => {
+return {
+  deck: state.questions.currentDeck
+}
+}
+
+export default connect(mapStateToProps)(DeckScreen)

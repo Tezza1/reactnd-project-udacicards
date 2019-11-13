@@ -25,7 +25,7 @@ const HomeScreen = props => {
     }
   });
 
-  const addDeckHandler = (title) => {
+  const addDeckHandler = title => {
     // setDeckList([...deckList, enteredDeck])
     setDeckList(prev => [
       ...prev,
@@ -53,13 +53,7 @@ const HomeScreen = props => {
 }
 
 HomeScreen.navigationOptions = {
-  headerTitle: '',
-  headerStyle: {
-    // backgroundColor: 'blue',
-    // fontFamily: 'openSans',
-    // fontWeight: '600'
-  },
-  headerTintColor: 'blue'
+  headerTitle: ''
 }
 
 const styles = StyleSheet.create({
