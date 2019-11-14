@@ -1,4 +1,5 @@
 import React, { useState, useEffect  } from 'react'
+import Header from '../components/Header'
 import { connect } from 'react-redux'
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 
@@ -11,51 +12,80 @@ const DeckScreen = props => {
     setQuestions(props.deck.questions)
   })
 
-
-  DeckScreen.navigationOptions = navigationData => {
-    return {
-      headerTitle: navigationData.navigation.getParam('title'),
-      headerStyle: {
-        fontFamily: 'openSans',
-        fontWeight: 'bold'
-      },
-      headerTintColor: '#0277bd'
-    }
-  }
-
   return(
     <View style={styles.screen}>
       <View>
-        <Button title='Go there' onPress={() => {
-          props.navigation.navigate({routeName: 'Slide'})
-        }}/>
-        <Text>This is the DeckScreen</Text>
-        <Text>{title}</Text>
-        <Text>{questions.length}</Text>
+        <Header title={"Udacicard's Japanese Builder"}/>
       </View>
-      <View>
+      <View style={styles.textArea}>
+        <View style={styles.mainText}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subText}>Questions in this deck:</Text>
+          <Text>{questions.length}</Text>
+        </View>
+        <View style={styles.buttons}>
+          <Button
+            title='Add card'
+            style={styles.button}
+            onPress={()=>{}}
+          />
+          <Button
+            title='Start quiz'
+            color="green"
+            style={styles.button}
+            onPress={()=>{
+              props.navigation.navigate({routeName: 'Quiz'})
+            }}
+          />
+        </View>
       </View>
     </View>
   )
 }
 
+DeckScreen.navigationOptions = {
+  headerTitle: 'Deck Info',
+  headerStyle: {
+    fontFamily: 'openSans',
+    fontWeight: 'bold'
+  },
+  headerTintColor: '#0277bd'
+}
+
 const styles = StyleSheet.create({
   screen: {
-    marginTop: 50,
-    flex: 1,
-    justifyContent: 'center',
+    flex: 1
+  },
+  textArea: {
     alignItems: 'center'
   },
-  grid: {
-    // flex: 1,
-    margin: 15,
-    height: 150
+  mainText: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 40,
+    marginBottom: 20
+  },
+  title :{
+    fontFamily: 'openSansBold',
+    color: '#0277bd',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  subText: {
+    marginTop: 20
+  },
+  buttons: {
+    flexDirection: 'row',
+    width: '60%',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 10
   }
 })
 
 const mapStateToProps = state => {
 return {
-  deck: state.questions.currentDeck
+  deck: state.decks.currentDeck
 }
 }
 

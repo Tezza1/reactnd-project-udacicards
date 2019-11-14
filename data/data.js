@@ -1,6 +1,6 @@
-export const QUESTIONS = {
+export const DECKS = {
   Verbs: {
-    title: 'Verbs',
+    title: 'Verbs (動詞)',
     questions: [
       {
         question: 'How do you say walk?',
@@ -17,7 +17,7 @@ export const QUESTIONS = {
     ]
   },
   WeekDays: {
-    title: 'Days of the week',
+    title: 'Days of the week (曜日)',
     questions: [
       {
         question: 'How do you say Thursday?',
@@ -34,7 +34,7 @@ export const QUESTIONS = {
     ]
   },
   Animals: {
-    title: 'Animals',
+    title: 'Animals (動物)',
     questions: [
       {
         question: 'How do you say cat?',

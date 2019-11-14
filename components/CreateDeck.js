@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-native'
+import { connect } from 'react-redux'
+import { addDeck } from '../store/actions/decks'
 
 const CreateDeck = props => {
   const [enteredDeck, setEnteredDeck] = useState('')
@@ -21,6 +23,7 @@ const CreateDeck = props => {
       setInputError(true)
     } else {
       props.onAddDeck(enteredDeck)
+      props.addDeck(enteredDeck)
       cancelHandler()
     }
   }
@@ -90,4 +93,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CreateDeck
+const mapDispatchToProps = dispatch => {
+  return {
+    addDeck: (title) => dispatch(addDeck(title))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateDeck)

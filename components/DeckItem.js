@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { setDeck } from '../store/actions/questions'
+import { setDeck } from '../store/actions/decks'
 
 const DeckItem = props => {
   return(

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getQuestions } from '../store/actions/questions'
+import { getDecks } from '../store/actions/decks'
 import { StyleSheet, View, FlatList } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
@@ -10,16 +10,16 @@ const HomeScreen = props => {
   const [deckList, setDeckList] = useState([])
 
   useEffect(() => {
-    props.getQuestions()
-    const { questions } = props
+    props.getDecks()
+    const { decks } = props
 
-    if (typeof questions === 'undefined'){
+    if (typeof decks === 'undefined'){
       console.log('')
     } else if (!deckList.length) {
-      for (let key in questions) {
+      for (let key in decks) {
         setDeckList(prev => [
           ...prev,
-          {key: Math.random().toString(), title: questions[key].title}
+          {key: Math.random().toString(), title: decks[key].title}
         ])
       }
     }
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions.questions
+    decks: state.decks.decks
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getQuestions: () => dispatch(getQuestions())
+    getDecks: () => dispatch(getDecks())
   }
 }
 
