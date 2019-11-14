@@ -17,7 +17,7 @@ A user can add quiz categories and quiz questions.
 * Notifications
 
 ## Additional personal learning goals
-* Reat Hooks
+* React Hooks
 * Git branches
 
 ## Setup
