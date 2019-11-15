@@ -27,7 +27,9 @@ const DeckScreen = props => {
           <Button
             title='Add card'
             style={styles.button}
-            onPress={()=>{}}
+            onPress={()=>{
+              props.navigation.navigate({routeName: 'Add'})
+            }}
           />
           <Button
             title='Start quiz'
@@ -57,12 +59,13 @@ const styles = StyleSheet.create({
     flex: 1
   },
   textArea: {
-    alignItems: 'center'
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   mainText: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 40,
     marginBottom: 20
   },
   title :{
