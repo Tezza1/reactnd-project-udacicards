@@ -42,7 +42,6 @@ const AddScreen = props => {
       cancelHandler()
     }
   }
-
   if(inputError){
     errorDisplay = (
       <View>
@@ -110,7 +109,6 @@ const styles = StyleSheet.create({
   textArea: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
     marginTop: 40
   },
   textInput: {

@@ -6,11 +6,27 @@ import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 const DeckScreen = props => {
   const [title, setTitle] = useState('')
   const [questions, setQuestions] = useState('')
+  const [errors, setErrors] = useState(false)
+  let errorText = ''
 
   useEffect(() => {
     setTitle(props.deck.title)
     setQuestions(props.deck.questions)
   })
+
+  const errorCheck = () => {
+    if(!props.deck.questions.length){
+      setErrors(true)
+    } else {
+      props.navigation.navigate({routeName: 'Quiz'})
+    }
+  }
+
+  if(errors) {
+    errorText = "Deck must contain a question"
+  } else {
+    errorText = ''
+  }
 
   return(
     <View style={styles.screen}>
@@ -27,6 +43,7 @@ const DeckScreen = props => {
             title='Add card'
             style={styles.button}
             onPress={()=>{
+              setErrors(false)
               props.navigation.navigate({routeName: 'Add'})
             }}
           />
@@ -34,10 +51,11 @@ const DeckScreen = props => {
             title='Start quiz'
             color="green"
             style={styles.button}
-            onPress={()=>{
-              props.navigation.navigate({routeName: 'Quiz'})
-            }}
+            onPress={errorCheck}
           />
+        </View>
+        <View>
+          <Text style={styles.errorText}>{errorText}</Text>
         </View>
       </View>
     </View>
@@ -78,6 +96,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontStyle: 'italic',
     fontSize: 18
+  },
+  errorText: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    marginTop: 30
   },
   buttons: {
     flexDirection: 'row',

@@ -10,18 +10,20 @@ const QuizScreen = props => {
     <View style={styles.screen}>
       <Header title={"Udacicard's Japanese Builder"}/>
       <View style={styles.mainText}>
-          <Text style={styles.title}>Question for {currentDeck.title}</Text>
+          <Text style={styles.title}>Quiz for {currentDeck.title}</Text>
       </View>
       <View>
         <Text style={styles.questionNumText}>Question {questionNumber + 1} of {currentDeck.questions.length}</Text>
       </View>
       <View>
-        <Text style={styles.questionText}>{currentDeck.questions[questionNumber].question}</Text>
+        <Text style={styles.questionText}>{questionNumber+1 > currentDeck.questions.length ? '' : currentDeck.questions[questionNumber].question}</Text>
       </View>
       <View>
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={()=>{}}>
+          onPress={()=>{
+            props.navigation.navigate({routeName: 'Answer'})
+        }}>
           <View style={styles.answerButton}>
             <Text style={styles.answerButtonText}>Show answer</Text>
           </View>

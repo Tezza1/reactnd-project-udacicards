@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK, SET_DECK, ADD_QUIZ, QUESTION_NUMBER, QUIZ_PROGRESS }from '../actions/actionTypes'
+import { GET_DECKS, ADD_DECK, SET_DECK, ADD_QUIZ, QUESTION_NUMBER, QUIZ_PROGRESS } from '../actions/actionTypes'
 import uuid from "uuid"
 
 const initialState = {
@@ -55,14 +55,16 @@ const decks = (state = initialState, action) => {
         decks: deck2
       }
     case QUESTION_NUMBER:
+      const { number } = action
       return {
         ...state,
-        questionNumber: action.number
+        questionNumber: number
       }
     case QUIZ_PROGRESS:
+      let score = state.progress
       return {
         ...state,
-        progress: action.correct
+        progress: score + 1
       }
     default:
       return state

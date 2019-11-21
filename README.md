@@ -10,7 +10,7 @@ A user can add quiz categories and quiz questions.
 
 ## Key technologies
 * React Native
-* Redux 
+* Redux
 * ES6
 * React navigation
 * Asynchronous storage

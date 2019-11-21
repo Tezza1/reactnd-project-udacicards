@@ -36,10 +36,9 @@ export const quizNumber = number => {
   }
 }
 
-export const quizProgress = correct => {
+export const quizProgress = () => {
   return {
     type: QUIZ_PROGRESS,
-    correct
   }
 }
 
