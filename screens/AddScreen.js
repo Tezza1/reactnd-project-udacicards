@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addQuiz, setDeck } from '../store/actions/decks'
 import { View, Text, Button, TextInput, StyleSheet, Keyboard } from 'react-native'
 import Header from '../components/Header'
 
@@ -6,14 +8,17 @@ const AddScreen = props => {
   const [enteredQuestion, setEnteredQuestion] = useState('')
   const [enteredAnswer, setEnteredAnswer] = useState('')
   const [inputError, setInputError] = useState(false)
+  const [successDisplay, setSuccessDisplay] = useState(<Text></Text>)
   let errorDisplay = ''
 
   const inputQTextHandler = (e) => {
     setEnteredQuestion(e)
+    setSuccessDisplay(<Text></Text>)
   }
 
   const inputATextHandler = (e) => {
     setEnteredAnswer(e)
+    setSuccessDisplay(<Text></Text>)
   }
 
   const cancelHandler = () => {
@@ -24,9 +29,16 @@ const AddScreen = props => {
   }
 
   const addHandler = () => {
-    if(enteredDeck === '') {
+    if(enteredQuestion === '' || enteredAnswer === '') {
       setInputError(true)
     } else {
+      props.addQuiz({
+        question: enteredQuestion,
+        answer: enteredAnswer
+      })
+      props.setDeck(props.currentDeck.title)
+      setSuccessDisplay(<Text style={styles.successText}>Succesfully added to Deck</Text>)
+      // props.navigation.goBack()
       cancelHandler()
     }
   }
@@ -34,7 +46,7 @@ const AddScreen = props => {
   if(inputError){
     errorDisplay = (
       <View>
-        <Text style={styles.errorText}>Please add a title</Text>
+        <Text style={styles.errorText}>Please complete the form</Text>
       </View>
     )
   } else {
@@ -49,6 +61,7 @@ const AddScreen = props => {
           <Text style={styles.title}>Add a question</Text>
         </View>
           {errorDisplay}
+          {successDisplay}
           <TextInput
             placeholder='Add a Question'
             style={styles.textInput}
@@ -73,9 +86,7 @@ const AddScreen = props => {
           <Button
             title='Add'
             style={styles.button}
-            onPress={()=>{
-              props.navigation.navigate({routeName: 'Quiz'})
-            }}
+            onPress={addHandler}
           />
         </View>
       </View>
@@ -99,7 +110,8 @@ const styles = StyleSheet.create({
   textArea: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    marginTop: 40
   },
   textInput: {
     width: '70%',
@@ -131,7 +143,25 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold',
     fontStyle: 'italic',
+  },
+  successText: {
+    color: 'green',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
   }
 })
 
-export default AddScreen
+mapStateToProps = state => {
+  return {
+    currentDeck: state.decks.currentDeck
+  }
+}
+
+mapDispatchToProps = dispatch => {
+  return {
+    addQuiz: (question) => dispatch(addQuiz(question)),
+    setDeck: (title) => dispatch(setDeck(title))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddScreen)

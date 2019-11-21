@@ -3,16 +3,16 @@ export const DECKS = {
     title: 'Verbs (動詞)',
     questions: [
       {
-        question: 'How do you say walk?',
-        answer: 'Arukimasu'
+        question: 'How do you say walk (歩く)?',
+        answer: 'aruku (あるく)'
       },
       {
-        question: 'How do you say eat?',
-        answer: 'Tabemasu'
+        question: 'How do you say to eat (食べる)?',
+        answer: 'taberu (たべる)'
       },
       {
-        question: 'How do you say write?',
-        answer: 'Kakimasu'
+        question: 'How do you say write (書く)?',
+        answer: 'kaku (かく)'
       }
     ]
   },
@@ -20,16 +20,16 @@ export const DECKS = {
     title: 'Days of the week (曜日)',
     questions: [
       {
-        question: 'How do you say Thursday?',
-        answer: 'Mokuyobi'
+        question: 'How do you say Thursday (木曜日)?',
+        answer: 'Mokuyobi (もくよび)'
       },
       {
-        question: 'How do you say Sunday?',
-        answer: 'Nichiyobi'
+        question: 'How do you say Sunday (日曜日)?',
+        answer: 'Nichiyobi (にちよび)'
       },
       {
-        question: 'How do you say Monday?',
-        answer: 'Getsuyobi'
+        question: 'How do you say Monday (月曜日)?',
+        answer: 'Getsuyobi (げつよび)'
       }
     ]
   },
@@ -37,16 +37,16 @@ export const DECKS = {
     title: 'Animals (動物)',
     questions: [
       {
-        question: 'How do you say cat?',
-        answer: 'Neko'
+        question: 'How do you say cat (猫)?',
+        answer: 'neko (ねこ)'
       },
       {
-        question: 'How do you say bird?',
-        answer: 'Tori'
+        question: 'How do you say bird (鳥)?',
+        answer: 'tori (とり)'
       },
       {
-        question: 'How do you say dog?',
-        answer: 'Inu'
+        question: 'How do you say dog (犬)?',
+        answer: 'inu (いぬ)'
       }
     ]
   }

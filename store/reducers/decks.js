@@ -1,9 +1,11 @@
-import { GET_DECKS, ADD_DECK, SET_DECK }from '../actions/actionTypes'
+import { GET_DECKS, ADD_DECK, SET_DECK, ADD_QUIZ, QUESTION_NUMBER, QUIZ_PROGRESS }from '../actions/actionTypes'
 import uuid from "uuid"
 
 const initialState = {
   decks: {},
-  currentDeck: ''
+  currentDeck: '',
+  questionNumber: 0,
+  progress: 0
 }
 
 const decks = (state = initialState, action) => {
@@ -24,10 +26,10 @@ const decks = (state = initialState, action) => {
       }
     case SET_DECK:
       const { title } = action
-      const decks1 = state.decks
+      const deck1 = state.decks
       let currentDeck = ''
 
-      for (let value of Object.values(decks1)) {
+      for (let value of Object.values(deck1)) {
         if (title === value.title) {
           currentDeck = value
         }
@@ -35,6 +37,32 @@ const decks = (state = initialState, action) => {
       return {
         ...state,
         currentDeck: currentDeck
+      }
+    case ADD_QUIZ:
+      const { question } = action
+      const deck2 = state.decks
+      const currentTitle = state.currentDeck.title
+      let updatedDecks = ''
+      let updatedDeck = ''
+
+      for (let value of Object.values(deck2)) {
+        if (currentTitle === value.title) {
+          value.questions.push(question)
+        }
+      }
+      return {
+        ...state,
+        decks: deck2
+      }
+    case QUESTION_NUMBER:
+      return {
+        ...state,
+        questionNumber: action.number
+      }
+    case QUIZ_PROGRESS:
+      return {
+        ...state,
+        progress: action.correct
       }
     default:
       return state

@@ -1,3 +1,6 @@
 export const GET_DECKS = 'GET_QUESTIONS'
 export const SET_DECK = 'SET_DECK'
 export const ADD_DECK = 'ADD_DECK'
+export const ADD_QUIZ = 'ADD_QUIZ'
+export const QUIZ_PROGRESS = 'QUIZ_PROGRESS'
+export const QUESTION_NUMBER = 'QUESTION_NUMBER'

@@ -20,8 +20,7 @@ const DeckScreen = props => {
       <View style={styles.textArea}>
         <View style={styles.mainText}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subText}>Questions in this deck:</Text>
-          <Text>{questions.length}</Text>
+          <Text style={styles.subText}>Questions in this deck: {questions.length}</Text>
         </View>
         <View style={styles.buttons}>
           <Button
@@ -61,7 +60,8 @@ const styles = StyleSheet.create({
   textArea: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    marginTop: 40
   },
   mainText: {
     width: '100%',
@@ -75,7 +75,9 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   subText: {
-    marginTop: 20
+    marginTop: 20,
+    fontStyle: 'italic',
+    fontSize: 18
   },
   buttons: {
     flexDirection: 'row',
@@ -87,9 +89,9 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-return {
-  deck: state.decks.currentDeck
-}
+  return {
+    deck: state.decks.currentDeck
+  }
 }
 
 export default connect(mapStateToProps)(DeckScreen)

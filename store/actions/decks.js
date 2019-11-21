@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK, SET_DECK } from './actionTypes'
+import { GET_DECKS, ADD_DECK, SET_DECK, ADD_QUIZ, QUESTION_NUMBER, QUIZ_PROGRESS } from './actionTypes'
 import { DECKS } from '../../data/data'
 
 export const getDecks = decks => {
@@ -19,6 +19,27 @@ export const setDeck = title => {
   return {
     type: SET_DECK,
     title
+  }
+}
+
+export const addQuiz = question => {
+  return{
+    type: ADD_QUIZ,
+    question
+  }
+}
+
+export const quizNumber = number => {
+  return {
+    type: QUESTION_NUMBER,
+    number
+  }
+}
+
+export const quizProgress = correct => {
+  return {
+    type: QUIZ_PROGRESS,
+    correct
   }
 }
 

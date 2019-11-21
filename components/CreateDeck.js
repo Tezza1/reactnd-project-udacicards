@@ -51,13 +51,11 @@ const CreateDeck = props => {
       <View style={styles.buttons}>
         <Button
           title='Cancel'
-          style={styles.button}
           color="red"
           onPress={cancelHandler}
         />
         <Button
           title='Add'
-          style={styles.button}
           onPress={addHandler}
         />
       </View>
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    width: '60%',
+    width: '70%',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginTop: 10

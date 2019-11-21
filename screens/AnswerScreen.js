@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 
-const SlideScreen = props => {
+const AnswerScreen = props => {
   return(
     <View style={styles.screen}>
         <Button title='Go there' onPress={() => {
           props.navigation.navigate({routeName: 'Quiz'})
         }}/>
-      <Text>This is the SlideScreen</Text>
+      <Text>This is the AnswerScreen</Text>
     </View>
   )
 }
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SlideScreen
+export default AnswerScreen
