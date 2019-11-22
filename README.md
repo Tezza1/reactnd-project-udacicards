@@ -26,4 +26,4 @@ To *****run** the project, from the **root** folder:
 2. Run the project with 'npm start'
 
 ## Platforms
-This app has been tested and optimized for _iOS_
+This app has been tested and optimized for **iOS**
