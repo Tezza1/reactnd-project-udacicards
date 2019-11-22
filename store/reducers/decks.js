@@ -42,12 +42,13 @@ const decks = (state = initialState, action) => {
       const { question } = action
       const deck2 = state.decks
       const currentTitle = state.currentDeck.title
-      let updatedDecks = ''
       let updatedDeck = ''
 
       for (let value of Object.values(deck2)) {
         if (currentTitle === value.title) {
-          value.questions.push(question)
+          updatedDeck = value.questions.concat(question)
+          const key = Object.keys(deck2)[Object.values(deck2).indexOf(value)]
+          deck2[key].questions = updatedDeck
         }
       }
       return {

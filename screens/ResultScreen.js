@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 import Header from '../components/Header'
 
 const ResultScreen = props => {
@@ -24,6 +24,17 @@ const ResultScreen = props => {
       <View style={styles.resultsContainer}>
         <Text style={styles.resultsText}>{progress} / {currentDeck.questions.length}</Text>
         <Text style={styles.resultsText}>{percentage(progress, currentDeck.questions.length)}% correct</Text>
+      </View>
+      <View style={styles.buttonArea}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={()=>{
+            props.navigation.navigate({routeName: 'Deck'})
+        }}>
+          <View style={styles.retakeButton}>
+            <Text style={styles.retakeButtonText}>Retry quiz</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -63,8 +74,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   resultsContainer: {
-    width: 300,
-    maxWidth: '80%',
+    width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 15,
@@ -85,6 +95,35 @@ const styles = StyleSheet.create({
   resultsText: {
     fontSize: 20,
     marginVertical: 10
+  },
+  buttonArea: {
+    alignItems: 'center'
+  },
+  retakeButton: {
+    width: 300,
+    maxWidth: '80%',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    marginVertical: 40,
+    borderColor: '#90a4ae',
+    borderWidth: 1,
+    // ios
+    shadowColor: '#607d8b',
+    shadowOffset: { width: 1, height: 2},
+    shadowRadius: 2,
+    shadowOpacity: 0.3,
+    // android
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: '#0277bd'
+  },
+  retakeButtonText: {
+    fontFamily: 'openSansBold',
+    color: 'white',
+    fontSize: 16,
+    marginLeft: 10
   }
 })
 

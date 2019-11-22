@@ -18,7 +18,7 @@ const QuizScreen = props => {
       <View>
         <Text style={styles.questionText}>{questionNumber+1 > currentDeck.questions.length ? '' : currentDeck.questions[questionNumber].question}</Text>
       </View>
-      <View>
+      <View style={styles.buttonArea}>
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={()=>{
@@ -45,7 +45,6 @@ QuizScreen.navigationOptions = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center'
   },
   mainText: {
@@ -70,7 +69,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 20
   },
+  buttonArea: {
+    alignItems: 'center'
+  },
   answerButton: {
+    width: 300,
+    maxWidth: '80%',
+    justifyContent: 'center',
     flexDirection: 'row',
     paddingHorizontal: 15,
     paddingVertical: 20,

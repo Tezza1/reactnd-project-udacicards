@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import { connect } from 'react-redux'
 import { quizProgress, quizNumber } from '../store/actions/decks'
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import { NavigationEvents } from 'react-navigation'
 
 const DeckScreen = props => {
   const [title, setTitle] = useState('')
@@ -37,6 +38,9 @@ const DeckScreen = props => {
 
   return(
     <View style={styles.screen}>
+      <NavigationEvents
+        onWillFocus={() => setQuestions(props.deck.questions)}
+      />
       <View>
         <Header title={"Udacicard's Japanese Builder"}/>
       </View>

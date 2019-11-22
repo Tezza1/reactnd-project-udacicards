@@ -19,18 +19,11 @@ const DeckItem = props => {
     }}>
       <View style={styles.listItem}>
         <Ionicons name='ios-arrow-forward' size={24} color={'white'}/>
-        <Text style={styles.title}>{props.title}</Text>
+        <Text style={styles.title}>{props.title} <Text style={styles.questions}> - {!props.questions ? 0 : props.questions} cards</Text></Text>
       </View>
     </TouchableOpacity>
   )
 }
-
-  /* <View>
-        <Button title='Go there' onPress={() => {
-          props.navigation.navigate({routeName: 'Deck'})
-        }}/>
-        </View>
-  */
 
 const styles = StyleSheet.create({
   listItem: {
@@ -55,6 +48,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     marginLeft: 10
+  },
+  questions: {
+    fontFamily: 'openSans',
+    fontSize: 14,
   }
 })
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavigationEvents } from 'react-navigation'
 import { connect } from 'react-redux'
 import { getDecks } from '../store/actions/decks'
 import { StyleSheet, View, FlatList } from 'react-native'
@@ -11,6 +12,10 @@ const HomeScreen = props => {
 
   useEffect(() => {
     props.getDecks()
+    // getData()
+  })
+
+  const getData = () => {
     const { decks } = props
 
     if (typeof decks === 'undefined'){
@@ -19,22 +24,46 @@ const HomeScreen = props => {
       for (let key in decks) {
         setDeckList(prev => [
           ...prev,
-          {key: Math.random().toString(), title: decks[key].title}
+          {
+            key: Math.random().toString(),
+            title: decks[key].title,
+            questions: decks[key].questions.length
+          }
+        ])
+      }
+    } else {
+      setDeckList([])
+      for (let key in decks) {
+          setDeckList(prev => [
+          ...prev,
+          {
+            key: Math.random().toString(),
+            title: decks[key].title,
+            questions: decks[key].questions.length
+          }
         ])
       }
     }
-  });
+  }
 
   const addDeckHandler = title => {
     // setDeckList([...deckList, enteredDeck])
     setDeckList(prev => [
       ...prev,
-      {key: Math.random().toString(), title: title}
+      {
+        key: Math.random().toString(),
+        title: title
+      }
     ])
   }
 
   return (
     <View style={styles.screen}>
+      <NavigationEvents
+        onWillFocus={() => {
+          getData()
+        }}
+      />
       <View>
         <Header title={"Udacicard's Japanese Builder"}/>
       </View>
@@ -44,8 +73,9 @@ const HomeScreen = props => {
         <FlatList
           data = { deckList }
           renderItem= {i => (
-              <DeckItem title={i.item.title} navigation={props.navigation} />
+              <DeckItem title={i.item.title} questions={i.item.questions} navigation={props.navigation} />
             )}
+          extraData={ deckList }
           />
       </View>
     </View>
