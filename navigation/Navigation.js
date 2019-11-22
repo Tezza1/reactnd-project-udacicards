@@ -35,7 +35,16 @@ const BottomTabNavigator = createBottomTabNavigator({
       fontFamily: 'openSansBold',
       fontSize: 18,
     },
-    tabStyle: {}
+    style: {
+      borderTopWidth: 1,
+      borderTopColor: '#90a4ae',
+      // ios
+      shadowColor: '#607d8b',
+      shadowRadius: 2,
+      shadowOpacity: 0.3,
+      // android
+      elevation: 5,
+    }
   }
 })
 

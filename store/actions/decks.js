@@ -36,9 +36,10 @@ export const quizNumber = number => {
   }
 }
 
-export const quizProgress = () => {
+export const quizProgress = reset => {
   return {
     type: QUIZ_PROGRESS,
+    reset
   }
 }
 

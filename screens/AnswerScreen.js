@@ -19,7 +19,7 @@ const AnswerScreen = props => {
   }
 
   const correctHandler = () => {
-    props.quizProgress()
+    props.quizProgress(false)
     wrongHandler()
   }
 
@@ -30,10 +30,10 @@ const AnswerScreen = props => {
           <Text style={styles.title}>Quiz for {currentDeck.title}</Text>
       </View>
       <View>
-        <Text style={styles.questionNumText}>Question {currentQ} of {currentDeck.questions.length}</Text>
+        <Text style={styles.questionNumText}>Question {questionNumber + 1} of {currentDeck.questions.length}</Text>
       </View>
       <View>
-        <Text style={styles.answerText}>{currentQ > currentDeck.questions.length ? '' : currentDeck.questions[questionNumber].answer}</Text>
+        <Text style={styles.answerText}>{questionNumber+1 > currentDeck.questions.length ? '' : currentDeck.questions[questionNumber].answer}</Text>
       </View>
       <View style={styles.buttons}>
         <Button
@@ -57,7 +57,8 @@ AnswerScreen.navigationOptions = {
     fontFamily: 'openSans',
     fontWeight: 'bold'
   },
-  headerTintColor: '#0277bd'
+  headerTintColor: '#0277bd',
+  headerLeft: null
 }
 
 const styles = StyleSheet.create({
@@ -106,7 +107,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     quizNumber: (num) => dispatch(quizNumber(num)),
-    quizProgress: () => dispatch(quizProgress())
+    quizProgress: (reset) => dispatch(quizProgress(reset))
   }
 }
 

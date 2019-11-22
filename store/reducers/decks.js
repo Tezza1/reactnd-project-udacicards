@@ -62,9 +62,14 @@ const decks = (state = initialState, action) => {
       }
     case QUIZ_PROGRESS:
       let score = state.progress
+      if(action.reset){
+        score = 0
+      } else {
+        score += 1
+      }
       return {
         ...state,
-        progress: score + 1
+        progress: score
       }
     default:
       return state

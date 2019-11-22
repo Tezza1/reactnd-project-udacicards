@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react'
 import Header from '../components/Header'
 import { connect } from 'react-redux'
+import { quizProgress, quizNumber } from '../store/actions/decks'
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 
 const DeckScreen = props => {
@@ -28,6 +29,12 @@ const DeckScreen = props => {
     errorText = ''
   }
 
+  const handleStartQuiz = () => {
+    props.quizProgress(true)
+    props.quizNumber(0)
+    errorCheck()
+  }
+
   return(
     <View style={styles.screen}>
       <View>
@@ -51,7 +58,7 @@ const DeckScreen = props => {
             title='Start quiz'
             color="green"
             style={styles.button}
-            onPress={errorCheck}
+            onPress={handleStartQuiz}
           />
         </View>
         <View>
@@ -118,4 +125,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(DeckScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    quizProgress: (reset) => dispatch(quizProgress(reset)),
+    quizNumber: (num) => dispatch(quizNumber(num))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckScreen)
