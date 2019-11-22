@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react'
 import Header from '../components/Header'
 import { connect } from 'react-redux'
+import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 import { quizProgress, quizNumber } from '../store/actions/decks'
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
@@ -31,6 +32,9 @@ const DeckScreen = props => {
   }
 
   const handleStartQuiz = () => {
+    clearLocalNotification()
+      .then(setLocalNotification)
+
     props.quizProgress(true)
     props.quizNumber(0)
     errorCheck()
