@@ -24,3 +24,6 @@ A user can add quiz categories and quiz questions.
 To *****run** the project, from the **root** folder:
 1. Install dependencies using 'npm install'
 2. Run the project with 'npm start'
+
+## Platforms
+This app has been tested and optimized for _iOS_
