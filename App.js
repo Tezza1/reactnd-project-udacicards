@@ -10,8 +10,6 @@ import rootReducer from './store/reducers'
 import { Provider } from 'react-redux'
 import applyMiddleware from './store/middleware'
 import { setLocalNotification } from './utils/helper'
-// import { persistStore, autoRehydrate } from 'redux-persist'
-// import { AsyncStorage } from 'react-native'
 
 const store = createStore(rootReducer, applyMiddleware)
 

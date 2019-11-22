@@ -15,7 +15,6 @@ A user can add quiz categories and quiz questions.
 * React navigation
 * Asynchronous storage
 * Notifications
-* Redux Persist
 
 ## Additional personal learning goals
 * React Hooks
