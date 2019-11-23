@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
-import { addDeck } from '../store/actions/decks'
+import { addDeck, setDeck } from '../store/actions/decks'
 
 const CreateDeck = props => {
   const [enteredDeck, setEnteredDeck] = useState('')
@@ -22,9 +22,10 @@ const CreateDeck = props => {
     if(enteredDeck === '') {
       setInputError(true)
     } else {
-      props.onAddDeck(enteredDeck)
       props.addDeck(enteredDeck)
       cancelHandler()
+      props.setDeck(enteredDeck)
+      props.navigation.navigate({ routeName: 'Deck' })
     }
   }
 
@@ -55,8 +56,8 @@ const CreateDeck = props => {
           onPress={cancelHandler}
         />
         <Button
-          title='Add'
-          onPress={addHandler}
+          title='Create Deck'
+          onPress={()=>{addHandler()}}
         />
       </View>
     </View>
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    width: '70%',
+    width: '80%',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginTop: 10
@@ -93,7 +94,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addDeck: (title) => dispatch(addDeck(title))
+    addDeck: (title) => dispatch(addDeck(title)),
+    setDeck: (title) => dispatch(setDeck(title))
   }
 }
 

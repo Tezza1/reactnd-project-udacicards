@@ -2,10 +2,10 @@ import React from 'react'
 import { NavigationEvents } from 'react-navigation'
 import { connect } from 'react-redux'
 import { handleGetDecks } from '../store/actions/decks'
-import { StyleSheet, View, Button, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import Header from '../components/Header'
+import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
-import { Ionicons } from '@expo/vector-icons'
 
 class HomeScreen extends React.Component {
   state = {
@@ -38,14 +38,18 @@ class HomeScreen extends React.Component {
     })
   }
 
-  myButton = (
-    <Ionicons.Button
-      name="ios-add-circle-outline"
-      backgroundColor='#3b5998'
-      onPress={() => { this.props.navigation.navigate({ routeName: 'New' })}}>
-      Add Deck
-  </Ionicons.Button>
-  )
+  addDeckHandler = title => {
+    const newItem ={
+      key: Math.random().toString(),
+      item: {
+        title: title,
+        questions: []
+      }
+    }
+    this.setState({
+      decks: [...this.state.decks, newItem]
+    })
+  }
 
   render(){
     return (
@@ -59,14 +63,12 @@ class HomeScreen extends React.Component {
           <Header title={"Udacicard's Japanese Builder"} />
         </View>
         <View style={styles.cardView} >
+          <CreateDeck onAddDeck={this.addDeckHandler}/>
           <ScrollView>
             {this.state.decks.map(i => {
               return <DeckItem key={i.key} title={i.item.title} questions={i.item.questions.length} navigation={this.props.navigation} />
             })}
           </ScrollView>
-          <View style={styles.buttonArea}>
-            {this.myButton}
-          </View>
         </View>
       </View>
     )
@@ -74,12 +76,7 @@ class HomeScreen extends React.Component {
 }
 
 HomeScreen.navigationOptions = {
-  headerTitle: 'Home',
-  headerStyle: {
-    fontFamily: 'openSans',
-    fontWeight: 'bold'
-  },
-  headerTintColor: '#0277bd'
+  headerTitle: ''
 }
 
 const styles = StyleSheet.create({
@@ -88,10 +85,7 @@ const styles = StyleSheet.create({
   },
   cardView: {
     padding: 50,
-    marginBottom: 100
-  },
-  buttonArea: {
-    paddingTop: 10,
+    marginBottom: 150
   }
 });
 

@@ -8,11 +8,13 @@ import QuizScreen from '../screens/QuizScreen'
 import AddScreen from '../screens/AddScreen'
 import AnswerScreen from '../screens/AnswerScreen'
 import ResultScreen from '../screens/ResultScreen'
+import NewDeckScreen from '../screens/NewDeckScreen'
 import { Ionicons } from '@expo/vector-icons'
 
 const AppNavigator = createStackNavigator({
   Home: HomeScreen,
   Deck: DeckScreen,
+  New: NewDeckScreen,
   Quiz: QuizScreen,
   Add: AddScreen,
   Answer: AnswerScreen,
