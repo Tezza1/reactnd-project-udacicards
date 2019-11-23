@@ -1,85 +1,78 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { NavigationEvents } from 'react-navigation'
 import { connect } from 'react-redux'
-import { getDecks } from '../store/actions/decks'
-import { StyleSheet, View, FlatList } from 'react-native'
+import { handleGetDecks } from '../store/actions/decks'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
 
-const HomeScreen = props => {
-  const [deckList, setDeckList] = useState([])
+class HomeScreen extends React.Component {
+  state = {
+    decks: []
+  }
 
-  useEffect(() => {
-    props.getDecks()
-    // getData()
-  })
+  componentDidMount(){
+    this.retrieveData()
+  }
 
-  const getData = () => {
-    const { decks } = props
+  retrieveData = async () => {
+    await this.props.getDecks()
+      .then(i => this.getData())
+    return 'done'
+  }
 
-    if (typeof decks === 'undefined'){
+  getData = () => {
+    const { decks } = this.props
+    let arrDecks = []
+    if (Object.getOwnPropertyNames(decks).length === 0) {
       console.log('')
-    } else if (!deckList.length) {
-      for (let key in decks) {
-        setDeckList(prev => [
-          ...prev,
-          {
-            key: Math.random().toString(),
-            title: decks[key].title,
-            questions: decks[key].questions.length
-          }
-        ])
-      }
     } else {
-      setDeckList([])
       for (let key in decks) {
-          setDeckList(prev => [
-          ...prev,
-          {
-            key: Math.random().toString(),
-            title: decks[key].title,
-            questions: decks[key].questions.length
-          }
-        ])
+        let value = decks[key]
+        arrDecks.push({key: key, item: value})
       }
     }
+    this.setState({
+      decks: arrDecks
+    })
   }
 
-  const addDeckHandler = title => {
-    // setDeckList([...deckList, enteredDeck])
-    setDeckList(prev => [
-      ...prev,
-      {
-        key: Math.random().toString(),
-        title: title
+  addDeckHandler = title => {
+    const newItem ={
+      key: Math.random().toString(),
+      item: {
+        title: title,
+        questions: []
       }
-    ])
+    }
+    this.setState({
+      decks: [...this.state.decks, newItem]
+    })
   }
 
-  return (
-    <View style={styles.screen}>
-      <NavigationEvents
-        onWillFocus={() => {
-          getData()
-        }}
-      />
-      <View>
-        <Header title={"Udacicard's Japanese Builder"}/>
+  render(){
+    return (
+      <View style={styles.screen}>
+        <NavigationEvents
+          onWillFocus={() => {
+            this.retrieveData()
+          }}
+        />
+        <View>
+          <Header title={"Udacicard's Japanese Builder"} />
+        </View>
+        <View style={styles.cardView} >
+          <CreateDeck onAddDeck={this.addDeckHandler}/>
+          <ScrollView>
+            {this.state.decks.map(i => {
+              return <DeckItem key={i.key} title={i.item.title} questions={i.item.questions.length} navigation={this.props.navigation} />
+            })}
+          </ScrollView>
+        </View>
       </View>
-      <View style={styles.cardView} >
-        <CreateDeck onAddDeck={addDeckHandler}/>
-        {/* <ScrollView></ScrollView> */}
-        <FlatList
-          data = { deckList }
-          renderItem= {i => (
-              <DeckItem title={i.item.title} questions={i.item.questions} navigation={props.navigation} />
-            )}
-          extraData={ deckList }
-          />
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
 HomeScreen.navigationOptions = {
@@ -91,7 +84,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   cardView: {
-    padding: 50
+    padding: 50,
+    marginBottom: 150
   }
 });
 
@@ -103,7 +97,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getDecks: () => dispatch(getDecks())
+    getDecks: () => dispatch(handleGetDecks())
   }
 }
 
