@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavigationEvents } from 'react-navigation'
 import { connect } from 'react-redux'
 import { handleGetDecks } from '../store/actions/decks'
-import { StyleSheet, View, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
@@ -12,12 +13,13 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    const retrieveData = async () => {
-      await this.props.getDecks()
-        .then(i => this.getData())
-      return 'done'
-    }
-    retrieveData()
+    this.retrieveData()
+  }
+
+  retrieveData = async () => {
+    await this.props.getDecks()
+      .then(i => this.getData())
+    return 'done'
   }
 
   getData = () => {
@@ -36,18 +38,32 @@ class HomeScreen extends React.Component {
     })
   }
 
-  addDeckHandler = () => {
-
+  addDeckHandler = title => {
+    const newItem ={
+      key: Math.random().toString(),
+      item: {
+        title: title,
+        questions: []
+      }
+    }
+    this.setState({
+      decks: [...this.state.decks, newItem]
+    })
   }
 
   render(){
     return (
       <View style={styles.screen}>
+        <NavigationEvents
+          onWillFocus={() => {
+            this.retrieveData()
+          }}
+        />
         <View>
           <Header title={"Udacicard's Japanese Builder"} />
         </View>
         <View style={styles.cardView} >
-          <CreateDeck onAddDeck={this.addDeckHandler} />
+          <CreateDeck onAddDeck={this.addDeckHandler}/>
           <ScrollView>
             {this.state.decks.map(i => {
               return <DeckItem key={i.key} title={i.item.title} questions={i.item.questions.length} navigation={this.props.navigation} />
@@ -68,7 +84,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   cardView: {
-    padding: 50
+    padding: 50,
+    marginBottom: 150
   }
 });
 

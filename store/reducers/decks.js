@@ -18,11 +18,6 @@ const storeData = async data => {
   }
 }
 
-const storeData2 = d => {
-  console.log("----------------------------- test again ------------")
-  console.log(d)
-}
-
 const decks = (state = initialState, action) => {
   switch(action.type) {
     case GET_DECKS:
@@ -67,6 +62,7 @@ const decks = (state = initialState, action) => {
           deck2[key].questions = updatedDeck
         }
       }
+      storeData(deck2)  // AsyncStorage
       return {
         ...state,
         decks: deck2
