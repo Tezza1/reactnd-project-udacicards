@@ -1,85 +1,62 @@
-import React, { useState, useEffect } from 'react'
-import { NavigationEvents } from 'react-navigation'
+import React from 'react'
 import { connect } from 'react-redux'
-import { getDecks } from '../store/actions/decks'
-import { StyleSheet, View, FlatList } from 'react-native'
+import { handleGetDecks } from '../store/actions/decks'
+import { StyleSheet, View, FlatList, ScrollView } from 'react-native'
 import Header from '../components/Header'
 import CreateDeck from '../components/CreateDeck'
 import DeckItem from '../components/DeckItem'
 
-const HomeScreen = props => {
-  const [deckList, setDeckList] = useState([])
+class HomeScreen extends React.Component {
+  state = {
+    decks: []
+  }
 
-  useEffect(() => {
-    props.getDecks()
-    // getData()
-  })
+  componentDidMount(){
+    const retrieveData = async () => {
+      await this.props.getDecks()
+        .then(i => this.getData())
+      return 'done'
+    }
+    retrieveData()
+  }
 
-  const getData = () => {
-    const { decks } = props
-
-    if (typeof decks === 'undefined'){
+  getData = () => {
+    const { decks } = this.props
+    let arrDecks = []
+    if (Object.getOwnPropertyNames(decks).length === 0) {
       console.log('')
-    } else if (!deckList.length) {
-      for (let key in decks) {
-        setDeckList(prev => [
-          ...prev,
-          {
-            key: Math.random().toString(),
-            title: decks[key].title,
-            questions: decks[key].questions.length
-          }
-        ])
-      }
     } else {
-      setDeckList([])
       for (let key in decks) {
-          setDeckList(prev => [
-          ...prev,
-          {
-            key: Math.random().toString(),
-            title: decks[key].title,
-            questions: decks[key].questions.length
-          }
-        ])
+        let value = decks[key]
+        arrDecks.push({key: key, item: value})
       }
     }
+    this.setState({
+      decks: arrDecks
+    })
   }
 
-  const addDeckHandler = title => {
-    // setDeckList([...deckList, enteredDeck])
-    setDeckList(prev => [
-      ...prev,
-      {
-        key: Math.random().toString(),
-        title: title
-      }
-    ])
+  addDeckHandler = () => {
+
   }
 
-  return (
-    <View style={styles.screen}>
-      <NavigationEvents
-        onWillFocus={() => {
-          getData()
-        }}
-      />
-      <View>
-        <Header title={"Udacicard's Japanese Builder"}/>
+  render(){
+    return (
+      <View style={styles.screen}>
+        <View>
+          <Header title={"Udacicard's Japanese Builder"} />
+        </View>
+        <View style={styles.cardView} >
+          <CreateDeck onAddDeck={this.addDeckHandler} />
+          <ScrollView>
+            {this.state.decks.map(i => {
+              return <DeckItem key={i.key} title={i.item.title} questions={i.item.questions.length} navigation={this.props.navigation} />
+            })}
+          </ScrollView>
+        </View>
       </View>
-      <View style={styles.cardView} >
-        <CreateDeck onAddDeck={addDeckHandler}/>
-        {/* <ScrollView></ScrollView> */}
-        <FlatList
-          data = { deckList }
-          renderItem= {i => (
-              <DeckItem title={i.item.title} questions={i.item.questions} navigation={props.navigation} />
-            )}
-          extraData={ deckList }
-          />
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
 HomeScreen.navigationOptions = {
@@ -103,7 +80,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getDecks: () => dispatch(getDecks())
+    getDecks: () => dispatch(handleGetDecks())
   }
 }
 

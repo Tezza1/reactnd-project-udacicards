@@ -1,11 +1,26 @@
 import { GET_DECKS, ADD_DECK, SET_DECK, ADD_QUIZ, QUESTION_NUMBER, QUIZ_PROGRESS } from '../actions/actionTypes'
 import uuid from "uuid"
+import { STORAGE_KEY } from '../../utils/keys'
+import { AsyncStorage } from 'react-native'
 
 const initialState = {
   decks: {},
   currentDeck: '',
   questionNumber: 0,
   progress: 0
+}
+
+const storeData = async data => {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const storeData2 = d => {
+  console.log("----------------------------- test again ------------")
+  console.log(d)
 }
 
 const decks = (state = initialState, action) => {
@@ -20,6 +35,7 @@ const decks = (state = initialState, action) => {
       const addData = {questions: [], "title": action.title}
       const currentDecks = state.decks
       currentDecks[uuid.v4()] = addData
+      storeData(currentDecks)  // AsyncStorage
       return {
         ...state,
         decks: currentDecks
